@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import NavigationBar from './NavigationBar';
 
 class App extends React.Component {

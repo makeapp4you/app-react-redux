@@ -1,12 +1,10 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 
 export default class Contact extends Component {
 
     render() {
         return (
-            <div className="class-name">
-               <h1> Contact</h1>
-            </div>
+            <h1>this is contact</h1>
         );
     }
 }
