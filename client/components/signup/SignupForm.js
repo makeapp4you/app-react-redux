@@ -49,9 +49,11 @@ class SignupForm extends Component {
         // Server tra ket qua errors ve > recept result and show to view
         if (this.isValid()) {
             this.setState({ errors: {}, isLoading: true });
-            this.props.userSignupRequest(this.state).then(() => { },
+            this.props.userSignupRequest(this.state).then(() => {
+                this.context.router.push('/');
+             },
                 // (err) => console.log({errors: err.response.data, isLoading: false })
-                (err) => this.setState({ errors: err.response.data, isLoading: false })
+        ({err}) => this.setState({ errors: err.response.data, isLoading: false })
             );
         }
 
@@ -110,7 +112,9 @@ class SignupForm extends Component {
                 </div>
 
                 <div className="form-group">
-                    <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">SignUp</button>
+                    <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">
+                    SignUp
+                    </button>
                 </div>
             </form>
         );
@@ -120,5 +124,7 @@ class SignupForm extends Component {
 SignupForm.propsTypes = {
     userSignupRequest: React.PropTypes.func.isRequired
 }
-
+SignupForm.contextTypes = {
+  router: React.PropTypes.object.isRequired
+}
 export default SignupForm;
