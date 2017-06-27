@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import timezones from '../../data/timezone';
 import map from 'lodash/map';
 import classnames from 'classnames';
+
+import validateInput from '../../../server/shared/validations/signup';
 import TextFieldGroup from '../common/TextFieldGroup';
 
 class SignupForm extends Component {
@@ -24,6 +26,15 @@ class SignupForm extends Component {
             .bind(this);
 
     }
+
+    isValid() {
+        const { errors, isValid } = validateInput(this.state);
+        if (!isValid) {
+            this.setState({ errors });
+        }
+        return isValid;
+    }
+
     onChange(e) {
         this.setState({
             [e.target.name]: e.target.value
@@ -36,17 +47,20 @@ class SignupForm extends Component {
         // tu SignupPage ta goi SignupAction tao ham request userSignupRequest(nhanThamSo) 
         // Tra ve ket qua neu co.
         // Server tra ket qua errors ve > recept result and show to view
-       this.setState({ errors: {}, isLoading: true });
-        this.props.userSignupRequest(this.state).then(()=>{},
-            // (err) => console.log({errors: err.response.data, isLoading: false })
-            (err) => this.setState({errors: err.response.data, isLoading: false})
-        );
+        if (this.isValid()) {
+            this.setState({ errors: {}, isLoading: true });
+            this.props.userSignupRequest(this.state).then(() => { },
+                // (err) => console.log({errors: err.response.data, isLoading: false })
+                (err) => this.setState({ errors: err.response.data, isLoading: false })
+            );
+        }
+
 
     }
     render() {
         const options = map(timezones, (val, key) => <option key={val} value={val}>{key}</option>
         );
-        const {errors} = this.state;
+        const { errors } = this.state;
         return (
             <form onSubmit={this.onSubmit}>
                 <h1>Form signup</h1>
@@ -56,6 +70,7 @@ class SignupForm extends Component {
                     onChange={this.onChange}
                     value={this.state.username}
                     field="username"
+                    text="text"
                 />
                 <TextFieldGroup
                     error={errors.email}
@@ -63,6 +78,7 @@ class SignupForm extends Component {
                     onChange={this.onChange}
                     value={this.state.email}
                     field="email"
+                    text="text"                    
                 />
                 <TextFieldGroup
                     error={errors.password}
@@ -70,6 +86,7 @@ class SignupForm extends Component {
                     onChange={this.onChange}
                     value={this.state.password}
                     field="password"
+                    type="password"
                 />
                 <TextFieldGroup
                     error={errors.rePassword}
@@ -77,21 +94,23 @@ class SignupForm extends Component {
                     onChange={this.onChange}
                     value={this.state.rePassword}
                     field="rePassword"
+                    type="password"                    
                 />
-                <div className="form-group">
-                        <label className="control-label">Timezone</label>
-                        <select
-                            className="form-control"
-                            name="timezone"
-                            onChange={this.onChange}
-                            value={this.state.timezone}>
-                            <option value="" disabled>Choose Your Timezone</option>
-                            {options}
-                        </select>
-                 </div>
+                <div className={classnames("form-group", { 'has-error': errors.timezone })}>
+                    <label className="control-label">Timezone</label>
+                    <select
+                        className="form-control"
+                        name="timezone"
+                        onChange={this.onChange}
+                        value={this.state.timezone}>
+                        <option value="" disabled>Choose Your Timezone</option>
+                        {options}
+                    </select>
+                    {errors.timezone && <span className="help-block">{errors.timezone}</span>}
+                </div>
 
                 <div className="form-group">
-                        <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">SignUp</button>
+                    <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">SignUp</button>
                 </div>
             </form>
         );
