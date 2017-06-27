@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import timezones from '../../data/timezone';
 import map from 'lodash/map';
 
-export default class SigupForm extends Component {
+class SignupForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,7 +27,11 @@ export default class SigupForm extends Component {
     }
     onSubmit(e) {
         e.preventDefault();
-        console.log(this.state);
+        // console.log(this.state); 
+        // dung props goi qua tu SignupPage va truyen vao data form input
+        // tu SignupPage ta goi SignupAction tao ham request userSignupRequest(nhanThamSo) 
+        // Tra ve ket qua neu co.
+        this.props.userSignupRequest(this.state);
     }
     render() {
         const options = map(timezones, (val, key) => <option key={val} value={val}>{key}</option>
@@ -90,3 +94,9 @@ export default class SigupForm extends Component {
         );
     }
 }
+
+SignupForm.propsTypes = {
+    userSignupRequest: React.PropTypes.func.isRequired 
+}
+
+export default SignupForm;
