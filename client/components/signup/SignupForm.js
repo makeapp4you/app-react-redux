@@ -16,7 +16,8 @@ class SignupForm extends Component {
             rePassword: '',
             timezone: '',
             errors: {},
-            isLoading: false
+            isLoading: false,
+            invalid: false
         }
         this.onChange = this
             .onChange
@@ -24,9 +25,25 @@ class SignupForm extends Component {
         this.onSubmit = this
             .onSubmit
             .bind(this);
+        this.CheckUserExists = this.CheckUserExists.bind(this);
 
     }
 
+    CheckUserExists() {
+        const field = e.target.name; 
+        const val = e.target.value;
+        if(val !=='') {
+            this.props.isUserExists(val).then(res=> {
+                let errors = this.state.errors;
+                let invalid;
+                if(res.data.user) {
+                    errors[field]= 'there is user with such' + field;
+                    invalid= false;
+                }
+                this.setState({ errors, invalid });
+            });
+        }
+    }
     isValid() {
         const { errors, isValid } = validateInput(this.state);
         if (!isValid) {
@@ -116,7 +133,7 @@ class SignupForm extends Component {
                 </div>
 
                 <div className="form-group">
-                    <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">
+                    <button className="btn btn-primary btn-lg">
                     SignUp
                     </button>
                 </div>

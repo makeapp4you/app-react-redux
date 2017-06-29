@@ -1,16 +1,49 @@
 import express from 'express';
-import validateInput from '../shared/validations/signup';
+import commonValidations from '../shared/validations/signup';
 import bcrypt from 'bcrypt';
+import isEmpty from 'lodash/isEmpty';
 
 import User from '../models/user';
 
 let router = express.Router();
 
+function validateInput(data, otherValidations) {
+  let { errors } = otherValidations(data);
+
+  return User.query({
+    where: { email: data.email },
+    orWhere: { username: data.username }
+  }).fetch().then(user => {
+    if (user) {
+      if (user.get('username') === data.username) {
+        errors.username = 'There is user with such username';
+      }
+      if (user.get('email') === data.email) {
+        errors.email = 'There is user with such email';
+      }
+    }
+
+    return {
+      errors,
+      isValid: isEmpty(errors)
+    };
+  })
+
+}
+
+router.get('/:identifier', (req, res) => {
+  User.query({
+    select: [ 'username', 'email' ],
+    where: { email: req.params.identifier },
+    orWhere: { username: req.params.identifier }
+  }).fetch().then(user => {
+    res.json({ user });
+  });
+});
+
 router.post('/', (req, res)=>{
-    // console.log(req.body);
-    const { errors, isValid } = validateInput(req.body);
-    console.log(errors, isValid);
-    if(isValid) {
+    validateInput(req.body, commonValidations).then(({ errors, isValid }) => {
+         if(isValid) {
         // res.json({ success: true }); 
         // var username="phat"; 
         // var password="123"; 
@@ -28,5 +61,6 @@ router.post('/', (req, res)=>{
     else{
         res.status(400).json(errors);
     }
+    });
 });
 export default router;
