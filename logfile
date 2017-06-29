@@ -1,0 +1,62 @@
+LOG:  database system was shut down at 2017-06-29 08:09:34 ICT
+LOG:  MultiXact member wraparound protections are now enabled
+LOG:  database system is ready to accept connections
+LOG:  autovacuum launcher started
+FATAL:  database "imac001" does not exist
+FATAL:  database "imac001" does not exist
+ERROR:  syntax error at or near "exit" at character 1
+STATEMENT:  exit;
+FATAL:  database "imac001" does not exist
+ERROR:  database "imac001" already exists
+STATEMENT:  CREATE DATABASE imac001;
+FATAL:  role "phat" does not exist
+FATAL:  database "react-redux" does not exist
+FATAL:  database "react" does not exist
+ERROR:  relation "users" does not exist at character 13
+STATEMENT:  insert into "users" ("created_at", "email", "password_digett", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  relation "users" does not exist at character 13
+STATEMENT:  insert into "users" ("created_at", "email", "password_digett", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  relation "users" does not exist at character 13
+STATEMENT:  insert into "users" ("created_at", "email", "password_digett", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  relation "users" does not exist at character 13
+STATEMENT:  insert into "users" ("created_at", "email", "password_digett", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  relation "users" does not exist at character 13
+STATEMENT:  insert into "users" ("created_at", "email", "password_digett", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  column "password_digett" of relation "users" does not exist at character 45
+STATEMENT:  insert into "users" ("created_at", "email", "password_digett", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  syntax error at or near "/" at character 1
+STATEMENT:  /ls
+	ls
+	-l
+	SELECT * FROM users
+	select * from users;
+ERROR:  syntax error at or near "select" at character 21
+STATEMENT:  SELECT * FROM users
+	select * from users;
+ERROR:  column "password_digett" of relation "users" does not exist at character 45
+STATEMENT:  insert into "users" ("created_at", "email", "password_digett", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  column "password_digett" of relation "users" does not exist at character 45
+STATEMENT:  insert into "users" ("created_at", "email", "password_digett", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  column "password_digett" of relation "users" does not exist at character 45
+STATEMENT:  insert into "users" ("created_at", "email", "password_digett", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  duplicate key value violates unique constraint "users_username_unique"
+DETAIL:  Key (username)=(phat) already exists.
+STATEMENT:  insert into "users" ("created_at", "email", "password_digest", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  duplicate key value violates unique constraint "users_username_unique"
+DETAIL:  Key (username)=(phat) already exists.
+STATEMENT:  insert into "users" ("created_at", "email", "password_digest", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  duplicate key value violates unique constraint "users_username_unique"
+DETAIL:  Key (username)=(phat) already exists.
+STATEMENT:  insert into "users" ("created_at", "email", "password_digest", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  duplicate key value violates unique constraint "users_username_unique"
+DETAIL:  Key (username)=(phat) already exists.
+STATEMENT:  insert into "users" ("created_at", "email", "password_digest", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  duplicate key value violates unique constraint "users_username_unique"
+DETAIL:  Key (username)=(phat) already exists.
+STATEMENT:  insert into "users" ("created_at", "email", "password_digest", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  duplicate key value violates unique constraint "users_username_unique"
+DETAIL:  Key (username)=(phat) already exists.
+STATEMENT:  insert into "users" ("created_at", "email", "password_digest", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
+ERROR:  duplicate key value violates unique constraint "users_username_unique"
+DETAIL:  Key (username)=(phat) already exists.
+STATEMENT:  insert into "users" ("created_at", "email", "password_digest", "timezone", "updated_at", "username") values ($1, $2, $3, $4, $5, $6) returning "id"
